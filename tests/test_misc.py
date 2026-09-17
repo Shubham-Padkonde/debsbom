@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 from debsbom.util.omnibor import omnibor_artifact_id
+from debsbom.util.swh import swh_id
 from pathlib import Path
 
 
@@ -14,4 +15,14 @@ def test_artifact_id():
         artifact_id
         # reference created with omnibor-rs
         == "gitoid:blob:sha256:cb16a7604bae14bc2d888df559984c2c60920a65c8f4645a7583aa0f1dee8341"
+    )
+
+
+def test_swhid():
+    artifact = Path("tests/data/omnibor.txt")
+
+    artifact_id = swh_id(artifact)
+    assert (
+        artifact_id
+        == "swh:1:cnt:cb16a7604bae14bc2d888df559984c2c60920a65c8f4645a7583aa0f1dee8341"
     )
